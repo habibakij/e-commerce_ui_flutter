@@ -38,17 +38,14 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        centerTitle: true,
-        leading: SizedBox(
+        automaticallyImplyLeading: false,
+        leading: Container(
           height: 20,
-          width: 20,
           child: Image.asset("images/handicon1.png", width: 15, height: 15, fit: BoxFit.none,),
         ),
         title: Container(
           margin: EdgeInsets.zero,
-          alignment: Alignment.centerLeft,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const <Widget> [
 
@@ -207,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     child: Column(
                                       children: <Widget> [
 
-                                        Container(
+                                        SizedBox(
                                           height: 85,
                                           child: Obx(() => Image.network(
                                             appController.productList.value[index]["image"] == null ? Common.previewImageUri : appController.productList.value[index]["image"].toString(),
@@ -216,14 +213,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                         ),
 
                                         Container(
-                                          height: 50,
+                                          height: 40,
+                                          margin: const EdgeInsets.only(top: 10),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                                             children: <Widget> [
 
                                               Container(
-                                                height: 50,
+                                                height: 40,
                                                 width: Common.halfWidth - 20,
+                                                margin: const EdgeInsets.only(left: 5, right: 5),
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                     color: Colors.white.withOpacity(.20),
@@ -247,6 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               Container(
                                                   height: 50,
                                                   width: 60,
+                                                  margin: const EdgeInsets.only(left: 5, right: 5),
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
                                                       color: Colors.white.withOpacity(.20),
@@ -277,7 +277,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ),
                                         ),
 
-                                        Container(
+                                        SizedBox(
                                           height: 50,
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
@@ -289,7 +289,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 margin: const EdgeInsets.only(right: 5),
                                                 alignment: Alignment.centerLeft,
                                                 child: Obx(() => Text(
-                                                  appController.productList.value[index]["price"] == null ? "price" : appController.productList.value[index]["price"].toString(),
+                                                  appController.productList.value[index]["price"] == null ? "price" : "\$ "+appController.productList.value[index]["price"].toString(),
                                                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                                 ),
                                                 ),
@@ -300,7 +300,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 margin: const EdgeInsets.only(left: 5),
                                                 alignment: Alignment.centerLeft,
                                                 child: Obx(() => Text(
-                                                  appController.productList.value[index]["price"] == null ? "price 2" : appController.productList.value[index]["price"].toString(),
+                                                  appController.productList.value[index]["price"] == null ? "price 2" : "\$ "+appController.productList.value[index]["price"].toString(),
                                                   style: const TextStyle(fontSize: 16, decoration: TextDecoration.lineThrough),
                                                 ),
                                                 ),
@@ -357,7 +357,51 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
 
-                    _popularCategoriesItem(),
+                    SizedBox(
+                      height: 150,
+                      child: Obx(() => ListView.builder(
+                          itemCount: appController.categoryList.value.length,
+                          scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index){
+                          return Container(
+                            height: 150,
+                            //width: 280,
+                            margin: const EdgeInsets.only(top: 10, left: 5),
+                            child: Stack(
+                              children: <Widget> [
+
+                                Builder(builder: (context){
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Obx(() => Image.network(
+                                      appController.categoryImageList.value[index].toString(),
+                                      width: 280, height: 150, fit: BoxFit.fill,
+                                    ),
+                                    ),
+                                  );
+                                }),
+                                Positioned(
+                                  child: Container(
+                                    alignment: Alignment.centerLeft,
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: Obx(()=> Text(
+                                      appController.categoryList.value[index].toString(),
+                                      style: const TextStyle(
+                                          fontSize: 30,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                          );
+                        }),
+                      ),
+                    ),
 
                   ],
                 ),
@@ -393,144 +437,12 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  _dailyNeedsItem(){
-    return Card(
-      margin: const EdgeInsets.only(top: 20),
-      elevation: 0,
-      color: Colors.grey[200],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Container(
-        height: 260,
-        width: Common.halfWidth + 70,
-        color: Colors.grey[200],
-        margin: const EdgeInsets.all(2),
-        child: Column(
-          children: <Widget> [
+}
 
-            Image.network("https://www.mobiledokan.com/wp-content/uploads/2022/02/Vivo-Y21T-image.jpg", width:100, height: 100,),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget> [
-
-                Container(
-                  height: 50,
-                  width: Common.halfWidth - 20,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.white.withOpacity(.20),
-                      width: 1,
-                    ),
-                    color: Colors.blue.withOpacity(.10),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const <Widget> [
-
-                      Icon(Icons.shopping_cart, color: Colors.blue,),
-
-                      Text("Add to cart", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 18),),
-
-                    ],
-                  ),
-                ),
-
-                Container(
-                    height: 50,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white.withOpacity(.20),
-                        width: 1,
-                      ),
-                      color: Colors.red.withOpacity(.10),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(
-                      child: Icon(Icons.favorite_border, color: Colors.red,),
-                    )
-                ),
-
-              ],
-            ),
-
-            Container(
-              height: 50,
-              width: 200,
-              margin: const EdgeInsets.only(top: 10),
-              alignment: Alignment.centerLeft,
-              child: const Text(
-                "Samesung A50, 8GB RAM, 256GB Rom, Silver color",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget> [
-
-                Container(
-                  height: 50,
-                  margin: const EdgeInsets.only(right: 5),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "\$ 2541.88",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-
-                Container(
-                  height: 50,
-                  margin: const EdgeInsets.only(left: 5),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "\$ 2514.10",
-                    style: TextStyle(fontSize: 16, decoration: TextDecoration.lineThrough),
-                  ),
-                ),
-
-              ],
-            ),
-
-          ],
-        ),
-      ),
-    );
-  }
-
-  _popularCategoriesItem(){
-    return Container(
-      height: 150,
-      width: 280,
-      margin: const EdgeInsets.only(top: 10),
-      child: Stack(
-        children: <Widget> [
-
-          Builder(builder: (context){
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                "https://wallpaperaccess.com/full/2983394.jpg",
-                width: 280, height: 150, fit: BoxFit.fill,
-              ),
-            );
-          }),
-          Positioned(
-            child: Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(left: 10),
-              child: const Text("Nature", style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
-            ),
-          ),
-        ],
-      ),
-
-    );
+class HomeBinding extends Bindings{
+  @override
+  void dependencies() {
+    // TODO: implement dependencies
   }
 
 }

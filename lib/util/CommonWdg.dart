@@ -23,7 +23,8 @@ class Common{
 
   static String categoryUri= "https://fakestoreapi.com/products/categories";
   static String productsUri= "https://fakestoreapi.com/products";
-  static String singleProductsUri= "https://fakestoreapi.com/products/"; /// /-id
+  static String singleProductsUri= "https://fakestoreapi.com/products/";
+  static String productsAllCategoryUri= "https://fakestoreapi.com/products/categories";
 
   static void configLoading() {
     EasyLoading.instance

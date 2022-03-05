@@ -136,15 +136,16 @@ class ProductDetailsPage extends StatelessWidget {
                                       ),
 
                                       Row(
-                                        children: const <Widget> [
+                                        children: <Widget> [
 
-                                          Icon(Icons.star, size: 20,),
+                                          const Icon(Icons.star, size: 20, color: Colors.amber,),
 
-                                          Text(
-                                            "(4.5)",
-                                            style: TextStyle(
+                                          Obx(() => Text(
+                                            "(${appController.rating.value.toString()})",
+                                            style: const TextStyle(
                                               fontSize: 14,
                                             ),
+                                          ),
                                           ),
 
                                         ],
@@ -390,7 +391,7 @@ class ProductDetailsPage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(left: 10),
             child: Obx(() => Text(
-              appController.productsPrice.value.toString(),
+              "\$ ${appController.productsPrice.value.toString()}",
               style: const TextStyle(
                 fontSize: 30,
                 color: Colors.black,

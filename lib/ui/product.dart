@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../controller/productcontroller.dart';
 import '../util/CommonWdg.dart';
+import 'package:get/get.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   late final ScrollController _scrollViewController= ScrollController();
+
+  var appController = Get.put(ProductsController());
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +100,10 @@ class ProductDetailsPage extends StatelessWidget {
                           Container(
                             height: 250,
                             margin: const EdgeInsets.only(top: 30),
-                            child: const CircleAvatar(
+                            child: Obx(() => CircleAvatar(
                               radius: 130, // Image radius
-                              backgroundImage: NetworkImage("http://pngbackground.com/public/uploads/preview/forest-picsart-cb-background-download-free-for-snapseed-11633511771qjwtrdqe8h.jpg"),
+                              backgroundImage: NetworkImage(appController.productImage.value.toString()),
+                            ),
                             ),
                           ),
 
@@ -118,10 +123,15 @@ class ProductDetailsPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget> [
 
-                                      const Text(
-                                        "Nick Air Max 200",
-                                        style: TextStyle(
-                                          fontSize: 30,
+                                      SizedBox(
+                                        height: 30,
+                                        width: Common.mainContainerWidth - 100,
+                                        child: Obx(() => Text(
+                                          appController.productTitle.value.toString(),
+                                          style: const TextStyle(
+                                            fontSize: 25,
+                                          ),
+                                        ),
                                         ),
                                       ),
 
@@ -146,7 +156,7 @@ class ProductDetailsPage extends StatelessWidget {
 
                                 Container(
                                   alignment: Alignment.centerLeft,
-                                  margin: const EdgeInsets.only(left: 10, right: 10),
+                                  margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
                                   child: const Text(
                                     "Build for natural motion the nick. Flax show",
                                     style: TextStyle(
@@ -379,13 +389,14 @@ class ProductDetailsPage extends StatelessWidget {
 
           Container(
             margin: const EdgeInsets.only(left: 10),
-            child: const Text(
-              "\$ 2500.20",
-              style: TextStyle(
+            child: Obx(() => Text(
+              appController.productsPrice.value.toString(),
+              style: const TextStyle(
                 fontSize: 30,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
+            ),
             ),
           ),
 

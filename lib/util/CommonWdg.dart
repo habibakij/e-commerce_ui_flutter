@@ -18,8 +18,12 @@ class Common{
     quaterHalf = (mainContainerWidth / 3) - 8;
   }
 
+  static String appbarImageUri = "https://w7.pngwing.com/pngs/310/974/png-transparent-two-dots-microphone-microphone-electronics-logo-monochrome-thumbnail.png";
+  static String previewImageUri= "https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg";
+
   static String categoryUri= "https://fakestoreapi.com/products/categories";
   static String productsUri= "https://fakestoreapi.com/products";
+  static String singleProductsUri= "https://fakestoreapi.com/products/"; /// /-id
 
   static void configLoading() {
     EasyLoading.instance

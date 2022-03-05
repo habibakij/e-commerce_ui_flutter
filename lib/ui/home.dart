@@ -22,7 +22,6 @@ class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   var appController= Get.put(ProductsController());
-  String uri= "https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg";
 
   @override
   void initState() {
@@ -211,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Container(
                                           height: 85,
                                           child: Obx(() => Image.network(
-                                            appController.productList.value[index]["image"] == null ? uri : appController.productList.value[index]["image"].toString(),
+                                            appController.productList.value[index]["image"] == null ? Common.previewImageUri : appController.productList.value[index]["image"].toString(),
                                             width:100, height: 100,
                                           ),),
                                         ),

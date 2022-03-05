@@ -11,8 +11,6 @@ import 'package:get/get.dart';
 
 class CategoriesPage extends StatelessWidget {
   late final ScrollController _scrollViewController = ScrollController();
-  String imageUri =
-      "https://w7.pngwing.com/pngs/310/974/png-transparent-two-dots-microphone-microphone-electronics-logo-monochrome-thumbnail.png";
   var appController = Get.put(ProductsController());
 
   @override
@@ -30,12 +28,12 @@ class CategoriesPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Image.network(
-                imageUri,
+                Common.appbarImageUri,
                 height: 30,
                 width: 15,
               ),
               Image.network(
-                imageUri,
+                Common.appbarImageUri,
                 height: 30,
                 width: 15,
               ),
@@ -347,7 +345,9 @@ class CategoriesPage extends StatelessWidget {
                                     ),
                                   ),
                                   onTap: (){
-                                    Get.to(ProductDetailsPage());
+                                    appController.selectProductID.value= index;
+                                    appController.getProductDetails(index);
+                                    //Get.to(ProductDetailsPage());
                                   },
                                 ),
                               ),

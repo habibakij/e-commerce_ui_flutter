@@ -21,7 +21,7 @@ install process -->
 2. click package install. 
 3. then click install.
 
-https://drive.google.com/file/d/1mgI7cjJs6ZgdAPAyqY5rkWezFR2XFORK/view?usp=sharing
+https://drive.google.com/file/d/1_Ur4_71LwxeQH3fbt1ddCcLOOs8IzibJ/view?usp=sharing
 
 Screenshot
 
